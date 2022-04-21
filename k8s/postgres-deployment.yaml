@@ -1,5 +1,4 @@
 apiVersion: apps/v1
-kind: apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres-deployment
@@ -13,6 +12,10 @@ spec:
       labels:
         component: postgres
     spec:
+      volumes:
+      - name: postgres-storage
+      persistentVolumeClaim:
+        claimName: database-persistent-volume-claim
       containers:
       - name: postgres
         image: postgres
